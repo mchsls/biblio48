@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История края - Краеведение</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Дополнительные стили для мягкости и разнообразия форм */
+        .soft-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .soft-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                #011d30, #100068, #e74c3c);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .organic-shape {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            padding: 3rem 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                inset 0 -2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            animation: morphing 15s ease-in-out infinite;
+        }
+
+        @keyframes morphing {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        .bubble-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.08),
+                0 6px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bubble-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .bubble-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.12),
+                0 15px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .bubble-card:hover::before {
+            opacity: 1;
+        }
+
+        .gradient-section {
+            background: linear-gradient(135deg, 
+                rgba(1, 29, 48, 0.03) 0%, 
+                rgba(16, 0, 104, 0.03) 50%, 
+                rgba(231, 76, 60, 0.03) 100%);
+            border-radius: 28px;
+            padding: 3rem;
+            margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(1, 29, 48, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .floating-element {
+            background: white;
+            border-radius: 18px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                0 5px 15px rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: float 6s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+
+        .timeline-modern {
+            position: relative;
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline-modern::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, 
+                #011d30 0%, 
+                #100068 50%, 
+                #e74c3c 100%);
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .timeline-item-modern {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 45%;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .timeline-item-modern:nth-child(odd) {
+            left: 0;
+            animation-delay: calc(var(--item-index) * 0.2s);
+        }
+
+        .timeline-item-modern:nth-child(even) {
+            left: 55%;
+            animation-delay: calc(var(--item-index) * 0.2s);
+        }
+
+        .timeline-dot-modern {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #011d30, #100068);
+            border-radius: 50%;
+            top: 20px;
+            z-index: 2;
+            box-shadow: 
+                0 4px 15px rgba(1, 29, 48, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+        }
+
+        .timeline-item-modern:nth-child(odd) .timeline-dot-modern {
+            right: -48px;
+        }
+
+        .timeline-item-modern:nth-child(even) .timeline-dot-modern {
+            left: -48px;
+        }
+
+        .timeline-content-modern {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.1),
+                0 6px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, #011d30, #100068);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .timeline-item-modern:hover .timeline-content-modern {
+            transform: translateX(5px) scale(1.02);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.15),
+                0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-year-modern {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #011d30;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #011d30, #100068);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        .timeline-year-modern::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #011d30, transparent);
+            border-radius: 2px;
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(1, 29, 48, 0.05) 0%, 
+                transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .circle-1 {
+            width: 120px;
+            height: 120px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 15%;
+            right: 8%;
+            animation-delay: 2s;
+        }
+
+        .circle-3 {
+            width: 60px;
+            height: 60px;
+            top: 40%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .soft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .soft-grid-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .soft-grid-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+            transition: left 0.7s ease;
+        }
+
+        .soft-grid-item:hover::before {
+            left: 100%;
+        }
+
+        .soft-grid-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.12),
+                0 15px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #011d30, #100068);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 
+                0 8px 25px rgba(1, 29, 48, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .soft-grid-item:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 12px 30px rgba(1, 29, 48, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Адаптивность для новых стилей */
+        @media (max-width: 768px) {
+            .timeline-modern::before {
+                left: 30px;
+            }
+            
+            .timeline-item-modern {
+                width: calc(100% - 60px);
+                left: 60px !important;
+            }
+            
+            .timeline-item-modern:nth-child(odd) .timeline-dot-modern,
+            .timeline-item-modern:nth-child(even) .timeline-dot-modern {
+                left: -40px;
+                right: auto;
+            }
+            
+            .organic-shape {
+                border-radius: 30px;
+                animation: none;
+            }
+            
+            .soft-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Улучшенные стили для текста */
+        .content-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .content-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #011d30;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #011d30, #100068);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+     <!-- Верхняя шапка -->
+    <div class="top-header">
+        <div class="container">
+            <div class="address">г. Липецк, ул. Л. Толстого, 40</div>
+            <div class="top-right">
+                <a href="#" class="login-btn" id="loginBtn">
+                    <i class="fas fa-user"></i>Личный кабинет
+                </a>
+                <div class="social-icons">
+                    <a href="https://vk.com/childbook_lipetsk"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-main-row">
+                <!-- Логотип слева -->
+                <div class="logo-section">
+                    <a href="../index.html" class="logo">
+                        <img src="../images/logo.png" alt="Логотип библиотеки">
+                        <div class="logo-text">
+                            <div class="logo-line1">Липецкая областная</div>
+                            <div class="logo-line2">детская библиотека</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Поиск справа -->
+                <div class="search-section">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" placeholder="поиск в каталоге " class="search-input">
+                            <button class="search-btn">НАЙТИ</button>
+                        </div>
+                        <a href="https://opac.lib48.ru/wlib/" class="all-catalogs">ВСЕ КАТАЛОГИ</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Меню -->
+            <nav class="main-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="about.html">О БИБЛИОТЕКЕ</a>
+                        <div class="dropdown-content">
+                            <a href="founder.html">Сведения об учредителе</a>
+                            <a href="documents.html">Документы</a>
+                            <a href="contacts.html">Контакты</a>
+                            <a href="requisites.html">Реквизиты и услуги</a>
+                            <a href="history.html">История библиотеки</a>
+                            <a href="anti-corruption.html">Противодействие коррупции</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="readers.html">ЧИТАТЕЛЯМ</a>
+                        <div class="dropdown-content">
+                            <a href="pushkin_card.html">Пушкинская карта</a>
+                            <a href="working_hours.html">Режим работы</a>
+                            <a href="rules.html">Правила пользования</a>
+                            <a href="services.html">Сервисы</a>
+                        </div>
+                    </li>
+                    <li><a href="afisha.html">АФИША</a></li>
+                    <li><a href="news.html">НОВОСТИ</a></li>
+                    <li><a href="bookshelf.html">КНИЖНАЯ ПОЛКА</a></li>
+                    <li class="dropdown">
+                        <a href="kraevedenie.html">КРАЕВЕДЕНИЕ</a>
+                        <div class="dropdown-content">
+                            <a href="kraevedenie-history.html">История края</a>
+                            <a href="kraevedenie-writers.html">Писатели Липецкой области</a>
+                            <a href="kraevedenie-resources.html">Краеведческие ресурсы</a>
+                        </div>
+                    </li>
+                    <li><a href="resources.html">РЕСУРСЫ</a></li>
+                    <li><a href="colleagues.html">КОЛЛЕГАМ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="kraevedenie-hero" style="padding: 80px 0; background: linear-gradient(135deg, #011d30 0%, #100068 100%); position: relative; overflow: hidden;">
+        <div class="decorative-circle circle-1"></div>
+        <div class="decorative-circle circle-2"></div>
+        <div class="decorative-circle circle-3"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title" style="font-size: 3.5rem; margin-bottom: 1rem;">ИСТОРИЯ КРАЯ</h1>
+                <p class="hero-subtitle" style="font-size: 1.4rem; opacity: 0.95;">От древних времен до современности: хронология развития Липецкой области</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <main class="modern-content">
+        <div class="container">
+            <div class="content-header">
+                <h2 class="content-title">Хронология событий</h2>
+                <p class="content-subtitle">Ключевые вехи в истории Липецкого края через призму времени</p>
+            </div>
+
+            <!-- Улучшенная Timeline -->
+            <div class="timeline-modern">
+                <div class="timeline-item-modern" style="--item-index: 1;">
+                    <div class="timeline-dot-modern"></div>
+                    <div class="timeline-content-modern">
+                        <div class="timeline-year-modern">Древнейший период</div>
+                        <p>Территория современной Липецкой области была заселена с древнейших времен. Археологические находки свидетельствуют о присутствии здесь людей уже в эпоху верхнего палеолита.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item-modern" style="--item-index: 2;">
+                    <div class="timeline-dot-modern"></div>
+                    <div class="timeline-content-modern">
+                        <div class="timeline-year-modern">IX-XII века</div>
+                        <p>Земли входили в состав Древнерусского государства, находясь на его юго-восточных рубежах. Через территорию края проходили важные торговые пути.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item-modern" style="--item-index: 3;">
+                    <div class="timeline-dot-modern"></div>
+                    <div class="timeline-content-modern">
+                        <div class="timeline-year-modern">XIII-XV века</div>
+                        <p>В период монголо-татарского нашествия территория подверглась разорению. Позднее эти земли вошли в состав Рязанского и Рязанско-Черниговского княжеств.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item-modern" style="--item-index: 4;">
+                    <div class="timeline-dot-modern"></div>
+                    <div class="timeline-content-modern">
+                        <div class="timeline-year-modern">XVI-XVII века</div>
+                        <p>Территория активно заселялась в связи с созданием Белгородской засечной черты для защиты от набегов кочевников. Возникают первые укрепленные поселения.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item-modern" style="--item-index: 5;">
+                    <div class="timeline-dot-modern"></div>
+                    <div class="timeline-content-modern">
+                        <div class="timeline-year-modern">1703 год</div>
+                        <p>По указу Петра I основаны Липские железоделательные заводы, что положило начало развитию Липецка как промышленного центра.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item-modern" style="--item-index: 6;">
+                    <div class="timeline-dot-modern"></div>
+                    <div class="timeline-content-modern">
+                        <div class="timeline-year-modern">1954 год</div>
+                        <p>Образована Липецкая область из окраинных районов соседних областей — Воронежской, Курской, Рязанской и Орловской.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Органическая форма с контентом -->
+            <div class="organic-shape">
+                <div class="content-header">
+                    <h2 class="content-title">Древняя история</h2>
+                    <p class="content-subtitle">Истоки Липецкого края уходят в глубину веков</p>
+                </div>
+                <div class="bubble-card">
+                    <h3 style="color: #011d30; margin-bottom: 1rem; font-size: 1.4rem;">Археологические находки</h3>
+                    <p style="line-height: 1.7; color: #555;">Территория Липецкой области была заселена с древнейших времен. Археологические находки свидетельствуют о присутствии здесь людей уже в эпоху верхнего палеолита (около 25-12 тысяч лет до н.э.). В эпоху бронзы (II тысячелетие до н.э.) здесь обитали племена срубной культуры, занимавшиеся скотоводством и земледелием.</p>
+                </div>
+            </div>
+
+            <!-- Мягкая сетка -->
+            <div class="soft-grid">
+                <div class="soft-grid-item">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Археологические памятники</h3>
+                    <p>На территории области обнаружены многочисленные археологические памятники разных эпох: городища, курганы, селища, стоянки древнего человека.</p>
+                </div>
+                
+                <div class="soft-grid-item">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>Промышленное развитие</h3>
+                    <p>История становления промышленности от петровских заводов до современных предприятий. Липецкая область - важный промышленный центр России.</p>
+                </div>
+                
+                <div class="soft-grid-item">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-monument"></i>
+                    </div>
+                    <h3>Культурное наследие</h3>
+                    <p>Сохранение традиций и развитие культуры в Липецкой области. Богатое историческое наследие, памятники архитектуры, народные промыслы.</p>
+                </div>
+            </div>
+
+            <!-- Градиентная секция -->
+            <div class="gradient-section">
+                <div class="content-header">
+                    <h2 class="content-title">Средневековый период</h2>
+                    <p class="content-subtitle">Становление региона в эпоху княжеств и торговых путей</p>
+                </div>
+                
+                <div class="floating-element">
+                    <h3 style="color: #011d30; margin-bottom: 1rem;">Торговые пути</h3>
+                    <p style="line-height: 1.7;">В IX-XII веках земли современной Липецкой области входили в состав Древнерусского государства, находясь на его юго-восточных рубежах. Через территорию края проходили важные торговые пути, связывавшие Киевскую Русь с Волжской Булгарией и Хазарским каганатом.</p>
+                </div>
+                
+                <div class="floating-element" style="animation-delay: 1s;">
+                    <h3 style="color: #011d30; margin-bottom: 1rem;">Монгольское нашествие</h3>
+                    <p style="line-height: 1.7;">В период монголо-татарского нашествия в XIII веке территория подверглась разорению. Позднее эти земли вошли в состав Рязанского и Рязанско-Черниговского княжеств.</p>
+                </div>
+            </div>
+
+            <!-- Мягкий контейнер -->
+            <div class="soft-container">
+                <div class="content-header">
+                    <h2 class="content-title">Образование Липецкой области</h2>
+                    <p class="content-subtitle">Современная история региона</p>
+                </div>
+                
+                <div class="bubble-card">
+                    <p style="line-height: 1.7; color: #555;">Липецкая область была образована 6 января 1954 года Указом Президиума Верховного Совета СССР из окраинных районов соседних областей. Областным центром стал город Липецк. Образование области было связано с необходимостью улучшения управления rapidly развивающимся промышленным и сельскохозяйственным регионом.</p>
+                </div>
+                
+                <div class="soft-grid" style="margin: 2rem 0;">
+                    <div class="soft-grid-item">
+                        <h4 style="color: #011d30; margin-bottom: 0.5rem;">Воронежская область</h4>
+                        <p style="font-size: 0.9rem; color: #666;">Боринский, Водопьяновский, Грачевский и другие районы</p>
+                    </div>
+                    <div class="soft-grid-item">
+                        <h4 style="color: #011d30; margin-bottom: 0.5rem;">Рязанская область</h4>
+                        <p style="font-size: 0.9rem; color: #666;">Березовский, Волынский, Воскресенский районы</p>
+                    </div>
+                    <div class="soft-grid-item">
+                        <h4 style="color: #011d30; margin-bottom: 0.5rem;">Курская и Орловская области</h4>
+                        <p style="font-size: 0.9rem; color: #666;">Воловский, Долгоруковский, Краснинский районы</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert-info" style="margin-top: 3rem;">
+                <h4><i class="fas fa-info-circle"></i> Дополнительные материалы</h4>
+                <p>Более подробную информацию вы можете найти в <a href="resources.html">разделе краеведческих ресурсов</a>, где представлены электронные коллекции и базы данных.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>г. Липецк, ул. Л. Толстого, 40</p>
+                    <p>Телефон: +7 (4742) 123-456</p>
+                    <p>Email: info@lib48.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="readers.html">Правила пользования</a></li>
+                        <li><a href="afisha.html">Афиша мероприятий</a></li>
+                        <li><a href="resources.html">Электронные ресурсы</a></li>
+                        <li><a href="services.html">Сервисы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Мы в соцсетях</h3>
+                    <div class="social-icons">
+                        <a href="https://vk.com/childbook_lipetsk"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Липецкая областная детская библиотека. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
