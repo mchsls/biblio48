@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Библиотека №48</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Логотип Библиотеки №48">
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav__link">Главная</a>
+                    <a href="account.html" class="nav__link">Личный кабинет</a>
+                    <a href="pages/bookshelf.html" class="nav__link">Книжная полка</a>
+                    <a href="pages/events.html" class="nav__link">Мероприятия</a>
+                </nav>
+                <div class="header__auth">
+                    <button class="btn btn--outline" id="adminLogoutBtn">Выйти</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin">
+        <div class="container">
+            <!-- Дашборд -->
+            <section class="admin__dashboard">
+                <h1 class="admin__title">Панель управления</h1>
+                
+                <div class="dashboard-stats" id="dashboardStats">
+                    <div class="stat-card admin-stat">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalUsers">0</div>
+                            <div class="stat-label">Пользователей</div>
+                        </div>
+                    </div>
+                    <div class="stat-card admin-stat">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalBooks">0</div>
+                            <div class="stat-label">Книг в каталоге</div>
+                        </div>
+                    </div>
+                    <div class="stat-card admin-stat">
+                        <div class="stat-icon">🎭</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="activeEvents">0</div>
+                            <div class="stat-label">Активных мероприятий</div>
+                        </div>
+                    </div>
+                    <div class="stat-card admin-stat">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="pendingReservations">0</div>
+                            <div class="stat-label">Ожидают выдачи</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Навигация админа -->
+            <nav class="admin__nav">
+                <button class="admin__nav-btn active" data-tab="books">Управление книгами</button>
+                <button class="admin__nav-btn" data-tab="events">Мероприятия</button>
+                <button class="admin__nav-btn" data-tab="reservations">Бронирования</button>
+                <button class="admin__nav-btn" data-tab="users">Пользователи</button>
+            </nav>
+
+            <!-- Контент админ-панели -->
+            <div class="admin__content">
+                <!-- Управление книгами -->
+                <section class="admin__tab active" id="books-tab">
+                    <div class="tab-header">
+                        <h2>Управление книгами</h2>
+                        <button class="btn btn--primary" id="addBookBtn">Добавить книгу</button>
+                    </div>
+                    
+                    <div class="admin-table-container">
+                        <table class="admin-table" id="booksTable">
+                            <thead>
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Автор</th>
+                                    <th>Категория</th>
+                                    <th>Всего/Доступно</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="booksTableBody">
+                                <!-- Данные загружаются через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Управление мероприятиями -->
+                <section class="admin__tab" id="events-tab">
+                    <div class="tab-header">
+                        <h2>Управление мероприятиями</h2>
+                        <button class="btn btn--primary" id="addEventBtn">Добавить мероприятие</button>
+                    </div>
+                    
+                    <div class="admin-table-container">
+                        <table class="admin-table" id="eventsTable">
+                            <thead>
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Дата</th>
+                                    <th>Место</th>
+                                    <th>Участники</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventsTableBody">
+                                <!-- Данные загружаются через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Просмотр бронирований -->
+                <section class="admin__tab" id="reservations-tab">
+                    <div class="tab-header">
+                        <h2>Бронирования книг</h2>
+                    </div>
+                    
+                    <div class="admin-table-container">
+                        <table class="admin-table" id="reservationsTable">
+                            <thead>
+                                <tr>
+                                    <th>Пользователь</th>
+                                    <th>Книга</th>
+                                    <th>Дата бронирования</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservationsTableBody">
+                                <!-- Данные загружаются через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Управление пользователями -->
+                <section class="admin__tab" id="users-tab">
+                    <div class="tab-header">
+                        <h2>Пользователи системы</h2>
+                    </div>
+                    
+                    <div class="admin-table-container">
+                        <table class="admin-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>ФИО</th>
+                                    <th>Email</th>
+                                    <th>Телефон</th>
+                                    <th>Роль</th>
+                                    <th>Дата регистрации</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- Данные загружаются через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальные окна для админа -->
+    <div class="modal" id="bookModal">
+        <div class="modal__content modal__content--large">
+            <div class="modal__header">
+                <h3 id="bookModalTitle">Добавить книгу</h3>
+                <button class="modal__close" id="closeBookModal">&times;</button>
+            </div>
+            <div class="modal__body">
+                <form id="bookForm">
+                    <input type="hidden" id="bookId" name="id">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookTitle">Название книги *</label>
+                            <input type="text" id="bookTitle" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookAuthor">Автор *</label>
+                            <input type="text" id="bookAuthor" name="author" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookDescription">Описание</label>
+                        <textarea id="bookDescription" name="description" rows="4"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookYear">Год издания</label>
+                            <input type="number" id="bookYear" name="year" min="1000" max="2030">
+                        </div>
+                        <div class="form-group">
+                            <label for="bookIsbn">ISBN</label>
+                            <input type="text" id="bookIsbn" name="isbn">
+                        </div>
+                        <div class="form-group">
+                            <label for="bookCategory">Категория</label>
+                            <input type="text" id="bookCategory" name="category">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookCopies">Количество экземпляров *</label>
+                            <input type="number" id="bookCopies" name="total_copies" min="1" required>
+                        </div>
+                    </div>
+                    <div class="modal__actions">
+                        <button type="button" class="btn btn--outline" id="cancelBookBtn">Отмена</button>
+                        <button type="submit" class="btn btn--primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

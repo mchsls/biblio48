@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - Липецкая областная детская библиотека</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Верхняя шапка -->
+    <div class="top-header">
+        <div class="container">
+            <div class="address">г. Липецк, ул. Л. Толстого, 40</div>
+            <div class="top-right">
+                <div class="user-menu">
+                    <span class="user-greeting" id="userGreeting">Привет, пользователь!</span>
+                    <button class="logout-btn" id="logoutBtn">Выйти</button>
+                </div>
+                <div class="social-icons">
+                    <a href="https://vk.com/childbook_lipetsk"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-main-row">
+                <!-- Логотип слева -->
+                <div class="logo-section">
+                    <a href="../index.html" class="logo">
+                        <img src="../images/logo.png" alt="Логотип библиотеки">
+                        <div class="logo-text">
+                            <div class="logo-line1">Липецкая областная</div>
+                            <div class="logo-line2">детская библиотека</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Поиск справа -->
+                <div class="search-section">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" placeholder="Поиск в каталоге" class="search-input">
+                            <button class="search-btn">НАЙТИ</button>
+                        </div>
+                        <a href="https://opac.lib48.ru/wlib/" class="all-catalogs">ВСЕ КАТАЛОГИ</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Меню -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">ГЛАВНАЯ</a></li>
+                    <li><a href="about.html">О БИБЛИОТЕКЕ</a></li>
+                    <li><a href="readers.html">ЧИТАТЕЛЯМ</a></li>
+                    <li><a href="afisha.html">АФИША</a></li>
+                    <li><a href="news.html">НОВОСТИ</a></li>
+                    <li><a href="bookshelf.html">КНИЖНАЯ ПОЛКА</a></li>
+                    <li><a href="kraevedenie.html">КРАЕВЕДЕНИЕ</a></li>
+                    <li><a href="resources.html">РЕСУРСЫ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент личного кабинета -->
+    <main class="account-main">
+        <div class="container">
+            <div class="account-header">
+                <h1>Личный кабинет</h1>
+                <div class="account-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="booksCount">0</div>
+                        <div class="stat-label">Книг прочитано</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="eventsCount">0</div>
+                        <div class="stat-label">Мероприятий посещено</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="reservationsCount">0</div>
+                        <div class="stat-label">Активных бронирований</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="account-tabs">
+                <button class="tab-btn active" data-tab="books">Мои книги</button>
+                <button class="tab-btn" data-tab="events">Мои мероприятия</button>
+                <button class="tab-btn" data-tab="profile">Профиль</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Вкладка Мои книги -->
+                <div class="tab-pane active" id="books-tab">
+                    <div class="tab-header">
+                        <h2>Мои книги</h2>
+                        <button class="btn btn-primary" id="reserveBookBtn">Забронировать книгу</button>
+                    </div>
+                    <div class="books-list" id="booksList">
+                        <div class="loading">Загрузка ваших книг...</div>
+                    </div>
+                </div>
+
+                <!-- Вкладка Мои мероприятия -->
+                <div class="tab-pane" id="events-tab">
+                    <div class="tab-header">
+                        <h2>Мои мероприятия</h2>
+                        <button class="btn btn-primary" id="registerEventBtn">Записаться на мероприятие</button>
+                    </div>
+                    <div class="events-list" id="eventsList">
+                        <div class="loading">Загрузка ваших мероприятий...</div>
+                    </div>
+                </div>
+
+                <!-- Вкладка Профиль -->
+                <div class="tab-pane" id="profile-tab">
+                    <div class="profile-form">
+                        <h2>Личная информация</h2>
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="userName">ФИО</label>
+                                <input type="text" id="userName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userEmail">Email</label>
+                                <input type="email" id="userEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userPhone">Телефон</label>
+                                <input type="tel" id="userPhone" name="phone">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно бронирования книги -->
+    <div class="modal" id="reserveModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Бронирование книги</h2>
+            <form id="reserveForm">
+                <div class="form-group">
+                    <label for="bookSelect">Выберите книгу:</label>
+                    <select id="bookSelect" required>
+                        <option value="">Выберите книгу...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reserveDate">Дата получения:</label>
+                    <input type="date" id="reserveDate" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Забронировать</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>г. Липецк, ул. Л. Толстого, 40</p>
+                    <p>Телефон: +7 (4742) 123-456</p>
+                    <p>Email: info@lib48.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="readers.html">Правила пользования</a></li>
+                        <li><a href="afisha.html">Афиша мероприятий</a></li>
+                        <li><a href="resources.html">Электронные ресурсы</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/account.js"></script>
+</body>
+</html>

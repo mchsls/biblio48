@@ -1,0 +1,306 @@
+/* Личный кабинет - Стили */
+.account {
+    padding: 40px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.account__hero {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideUp 0.6s ease;
+}
+
+.account__welcome h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+.account__welcome p {
+    color: #7f8c8d;
+    font-size: 1.2em;
+}
+
+.account__stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card__icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.stat-card__number {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-card__label {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* Навигация по вкладкам */
+.account__nav {
+    display: flex;
+    background: white;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.account__nav-btn {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    color: #7f8c8d;
+}
+
+.account__nav-btn.active {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+}
+
+.account__nav-btn:hover:not(.active) {
+    background: #f8f9fa;
+    color: #3498db;
+}
+
+/* Контент вкладок */
+.account__content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+.account__tab {
+    display: none;
+}
+
+.account__tab.active {
+    display: block;
+    animation: slideIn 0.5s ease;
+}
+
+.tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.tab-header h2 {
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Сетки контента */
+.books-grid, .events-grid, .favorites-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.book-card, .event-card, .favorite-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    border-left: 4px solid #3498db;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-card:hover, .event-card:hover, .favorite-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.book-info, .event-info {
+    flex: 1;
+}
+
+.book-title, .event-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.book-author, .event-date {
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.book-status, .event-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.status-reserved { background: #fff3cd; color: #856404; }
+.status-picked_up { background: #d1ecf1; color: #0c5460; }
+.status-returned { background: #d4edda; color: #155724; }
+
+/* Формы */
+.profile-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.profile-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 4px solid #3498db;
+}
+
+.profile-card h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ecf0f1;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Состояния загрузки и пустые состояния */
+.section__loading {
+    text-align: center;
+    padding: 40px;
+    color: #7f8c8d;
+    font-size: 1.1em;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #7f8c8d;
+}
+
+.empty-state__icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+/* Анимации */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .account__hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .account__stats {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .account__nav {
+        flex-direction: column;
+    }
+    
+    .profile-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .book-card, .event-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}

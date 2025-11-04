@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реквизиты и услуги - Липецкая областная детская библиотека</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Обновленные стили для заголовка на всю ширину */
+        .page-header-full {
+            background: 
+                linear-gradient(135deg, var(--primary) 0%, #100068 100%),
+                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,20 L25,15 L30,20 L25,25 Z' fill='%23ffffff' fill-opacity='0.05'/%3E%3Cpath d='M80,30 L85,25 L90,30 L85,35 Z' fill='%23ffffff' fill-opacity='0.05'/%3E%3Cpath d='M40,60 L45,55 L50,60 L45,65 Z' fill='%23ffffff' fill-opacity='0.05'/%3E%3Cpath d='M70,80 L75,75 L80,80 L75,85 Z' fill='%23ffffff' fill-opacity='0.05'/%3E%3Cpath d='M10,90 L15,85 L20,90 L15,95 Z' fill='%23ffffff' fill-opacity='0.05'/%3E%3Cpath d='M95,50 L100,45 L105,50 L100,55 Z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+        }
+
+        .page-header-full .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .page-header-full .page-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .page-header-full .page-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* Анимированные карточки */
+        .animated-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e1e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-card:hover::before {
+            opacity: 1;
+        }
+
+        .content-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        /* Улучшенные реквизиты */
+        .requisites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .requisite-item {
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border-left: 4px solid #0f143d;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .requisite-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+           background: linear-gradient(86deg, #0b62ff00, rgb(158 3 255 / 10%), #b81a1a00);
+            transition: left 0.6s ease;
+        }
+
+        .requisite-item:hover::before {
+            left: 100%;
+        }
+
+        .requisite-item:hover {
+            background: #f1f5f9;
+            transform: translateX(5px);
+        }
+
+        .requisite-item strong {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .requisite-item span {
+            color: #2d3748;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Улучшенные вкладки */
+        .services-tabs {
+            margin-top: 2rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            flex-wrap: wrap;
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 0.5rem;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab-button:hover:not(.active) {
+            color: var(--accent);
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* Улучшенные услуги */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.03), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-item:hover::before {
+            opacity: 1;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+
+        .service-item h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .service-item h4 i {
+            color: var(--accent);
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover h4 i {
+            transform: scale(1.1);
+        }
+
+        /* Улучшенная таблица */
+        .pricing-table {
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            background: white;
+        }
+
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .services-table th,
+        .services-table td {
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .services-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .services-table tr {
+            transition: background-color 0.3s ease;
+        }
+
+        .services-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .services-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Улучшенные шаги */
+        .procedure-steps {
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .procedure-steps::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent);
+            border-radius: 1px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 2rem;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.05);
+        }
+
+        .step-content {
+            flex: 1;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover .step-content {
+            transform: translateX(5px);
+            background: #f1f5f9;
+        }
+
+        .step-content h4 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Кнопка назад */
+        .btn-back {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(1, 29, 48, 0.2);
+        }
+
+        .btn-back:hover {
+            background: #1a4d8c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(1, 29, 48, 0.3);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .page-header-full {
+                padding: 3rem 0;
+                margin-left: -20px;
+                margin-right: -20px;
+                width: calc(100% + 40px);
+            }
+
+            .page-header-full .page-title {
+                font-size: 2.2rem;
+            }
+
+            .page-header-full .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .content-card {
+                padding: 2rem;
+                margin: 0 -10px 2rem;
+                width: calc(100% + 20px);
+                border-radius: 10px;
+            }
+
+            .requisites-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+                padding: 0.25rem;
+            }
+
+            .tab-button {
+                justify-content: center;
+                text-align: center;
+                padding: 0.8rem 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .procedure-steps::before {
+                left: 20px;
+            }
+
+            .services-table {
+                font-size: 0.9rem;
+            }
+
+            .services-table th,
+            .services-table td {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header-full .page-title {
+                font-size: 1.8rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .requisite-item {
+                padding: 1.2rem;
+            }
+
+            .service-item {
+                padding: 1.5rem;
+            }
+
+            .tab-button {
+                padding: 0.7rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Верхняя шапка -->
+    <div class="top-header">
+        <div class="container">
+            <div class="address">г. Липецк, ул. Л. Толстого, 40</div>
+            <div class="top-right">
+                <a href="#" class="login-btn" id="loginBtn">
+                    <i class="fas fa-user"></i>Личный кабинет
+                </a>
+                <div class="social-icons">
+                    <a href="https://vk.com/childbook_lipetsk"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-main-row">
+                <div class="logo-section">
+                    <a href="../index.html" class="logo">
+                        <img src="../images/logo.png" alt="Логотип библиотеки">
+                        <div class="logo-text">
+                            <div class="logo-line1">Липецкая областная</div>
+                            <div class="logo-line2">детская библиотека</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="search-section">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" placeholder="поиск в каталоге " class="search-input">
+                            <button class="search-btn">НАЙТИ</button>
+                        </div>
+                        <a href="https://opac.lib48.ru/wlib/" class="all-catalogs">ВСЕ КАТАЛОГИ</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="about.html">О БИБЛИОТЕКЕ</a>
+                        <div class="dropdown-content">
+                            <a href="founder.html">Сведения об учредителе</a>
+                            <a href="documents.html">Документы</a>
+                            <a href="contacts.html">Контакты</a>
+                            <a href="requisites.html" class="active">Реквизиты и услуги</a>
+                            <a href="history.html">История библиотеки</a>
+                            <a href="anti-corruption.html">Противодействие коррупции</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="readers.html">ЧИТАТЕЛЯМ</a>
+                        <div class="dropdown-content">
+                            <a href="readers.html#rules">Правила пользования</a>
+                            <a href="readers.html#services">Сервисы</a>
+                            <a href="working-hours.html">Режим работы</a>
+                            <a href="readers.html#pushkin">Пушкинская карта</a>
+                        </div>
+                    </li>
+                    <li><a href="afisha.html">АФИША</a></li>
+                    <li><a href="news.html">НОВОСТИ</a></li>
+                    <li><a href="bookshelf.html">КНИЖНАЯ ПОЛКА</a></li>
+                  <li class="dropdown">
+    <a href="kraevedenie.html">КРАЕВЕДЕНИЕ</a>
+    <div class="dropdown-content">
+        <a href="kraevedenie-history.html">История края</a>
+        <a href="kraevedenie-writers.html">Писатели Липецкой области</a>
+        <a href="kraevedenie-resources.html">Краеведческие ресурсы</a>
+    </div>
+</li>
+                    <li><a href="resources.html">РЕСУРСЫ</a></li>
+                    <li><a href="colleagues.html">КОЛЛЕГАМ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Обновленный заголовок на всю ширину -->
+        <div class="page-header-full">
+            <div class="container">
+                <h1 class="page-title">Реквизиты и услуги</h1>
+                <p class="page-subtitle">Полный перечень услуг и реквизиты библиотеки</p>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="content-section">
+                <div class="content-card animated-card">
+                    <h2><i class="fas fa-university"></i> Банковские реквизиты</h2>
+                    
+                    <div class="requisites-info">
+                        <div class="requisites-grid">
+                            <div class="requisite-item">
+                                <strong>Полное наименование:</strong>
+                                <span>Государственное бюджетное учреждение культуры "Липецкая областная детская библиотека"</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>Сокращенное наименование:</strong>
+                                <span>ГБУК "ЛОДБ"</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>ИНН:</strong>
+                                <span>4823456789</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>КПП:</strong>
+                                <span>482301001</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>ОГРН:</strong>
+                                <span>1024800000000</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>ОКПО:</strong>
+                                <span>12345678</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>Расчетный счет:</strong>
+                                <span>40701810500000000001</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>Банк:</strong>
+                                <span>Отделение Липецк Банка России//УФК по Липецкой области г. Липецк</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>БИК:</strong>
+                                <span>044206001</span>
+                            </div>
+                            <div class="requisite-item">
+                                <strong>Корреспондентский счет:</strong>
+                                <span>40102810945370000001</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card animated-card">
+                    <h2><i class="fas fa-concierge-bell"></i> Услуги библиотеки</h2>
+                    <p>В соответствии с Федеральным законом Российской Федерации от 29 декабря 1994 года № 78-ФЗ «О библиотечном деле» библиотека предоставляет следующие виды услуг:</p>
+                    
+                    <div class="services-tabs">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" data-tab="free">
+                                <i class="fas fa-gift"></i> Бесплатные услуги
+                            </button>
+                            <button class="tab-button" data-tab="paid">
+                                <i class="fas fa-ruble-sign"></i> Платные услуги
+                            </button>
+                        </div>
+                        
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="free">
+                                <h3>Основные бесплатные услуги</h3>
+                                <div class="services-grid">
+                                    <div class="service-item">
+                                        <h4><i class="fas fa-book-open"></i> Выдача документов</h4>
+                                        <p>Выдача книг, журналов, газет на дом и для работы в читальных залах</p>
+                                    </div>
+                                    <div class="service-item">
+                                        <h4><i class="fas fa-search"></i> Справочно-библиографическое обслуживание</h4>
+                                        <p>Выполнение тематических, фактографических и уточняющих справок</p>
+                                    </div>
+                                    <div class="service-item">
+                                        <h4><i class="fas fa-laptop"></i> Доступ к электронным ресурсам</h4>
+                                        <p>Предоставление доступа к электронному каталогу, базам данных, интернет-ресурсам</p>
+                                    </div>
+                                    <div class="service-item">
+                                        <h4><i class="fas fa-users"></i> Культурно-просветительские мероприятия</h4>
+                                        <p>Организация выставок, лекций, встреч с писателями, литературных вечеров</p>
+                                    </div>
+                                    <div class="service-item">
+                                        <h4><i class="fas fa-graduation-cap"></i> Консультации</h4>
+                                        <p>Консультации по поиску информации и работе с библиотечными ресурсами</p>
+                                    </div>
+                                    <div class="service-item">
+                                        <h4><i class="fas fa-child"></i> Работа с детьми</h4>
+                                        <p>Проведение занятий по приобщению детей к чтению, развивающих мероприятий</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane" id="paid">
+                                <h3>Платные услуги</h3>
+                                <div class="pricing-table">
+                                    <table class="services-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Наименование услуги</th>
+                                                <th>Стоимость</th>
+                                                <th>Примечание</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Ксерокопирование документа (формат А4)</td>
+                                                <td>5 руб./стр.</td>
+                                                <td>Черно-белое</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Сканирование документа</td>
+                                                <td>10 руб./стр.</td>
+                                                <td>Формат А4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Распечатка документа (черно-белая)</td>
+                                                <td>8 руб./стр.</td>
+                                                <td>С собственного носителя</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Изготовление читательского билета</td>
+                                                <td>50 руб.</td>
+                                                <td>При утере</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Бронирование литературы онлайн</td>
+                                                <td>20 руб.</td>
+                                                <td>За одну книгу</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Продление срока пользования онлайн</td>
+                                                <td>15 руб.</td>
+                                                <td>За одну книгу</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Составление библиографических списков</td>
+                                                <td>100 руб.</td>
+                                                <td>До 10 наименований</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card animated-card">
+                    <h2><i class="fas fa-list-ol"></i> Порядок оказания услуг</h2>
+                    <div class="procedure-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Обращение в библиотеку</h4>
+                                <p>Читатель обращается в соответствующий отдел библиотеки с запросом на получение услуги</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Консультация специалиста</h4>
+                                <p>Сотрудник библиотеки консультирует по условиям оказания услуги и срокам выполнения</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Оформление заказа</h4>
+                                <p>При необходимости заключается договор на оказание платных услуг</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Оказание услуги</h4>
+                                <p>Библиотека выполняет запрос читателя в установленные сроки</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Обратная связь</h4>
+                                <p>Читатель оценивает качество оказанной услуги</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="about.html" class="btn-back">
+                    <i class="fas fa-arrow-left"></i>
+                    Вернуться к разделу "О библиотеке"
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>г. Липецк, ул. Л. Толстого, 40</p>
+                    <p>Телефон: +7 (4742) 123-456</p>
+                    <p>Email: info@lib48.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="about.html">О библиотеке</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="documents.html">Документы</a></li>
+                        <li><a href="requisites.html">Услуги</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Мы в соцсетях</h3>
+                    <div class="social-icons">
+                        <a href="https://vk.com/childbook_lipetsk"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Липецкая областная детская библиотека. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Убираем активный класс у всех кнопок и панелей
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+                    
+                    // Добавляем активный класс текущей кнопке и соответствующей панели
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+
+            // Анимация появления карточек с задержкой
+            const animatedCards = document.querySelectorAll('.animated-card');
+            animatedCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
