@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервисы - Липецкая областная детская библиотека</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Дополнительные стили для страницы сервисов */
+        .services-hero {
+            background: 
+                linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,20 L80,20 L80,80 L20,80 Z' fill='none' stroke='%23ffffff' stroke-width='2' stroke-opacity='0.1'/%3E%3Cpath d='M30,30 L70,30 L70,70 L30,70 Z' fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.05'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23ffffff' fill-opacity='0.05'/%3E%3Cpath d='M15,50 L35,50 M65,50 L85,50 M50,15 L50,35 M50,65 L50,85' stroke='%23ffffff' stroke-width='1.5' stroke-opacity='0.08'/%3E%3C/svg%3E");
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            border-radius: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M20,10 L25,15 L20,20 L15,15 Z M40,10 L45,15 L40,20 L35,15 Z M20,40 L25,45 L20,50 L15,45 Z M40,40 L45,45 L40,50 L35,45 Z'/%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10,40 Q40,10 70,40 Q40,70 10,40 Z' fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.04'/%3E%3C/svg%3E");
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .services-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .services-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .services-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            font-weight: 400;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Обновленные стили для карточек сервисов */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            animation: pulse 2s infinite;
+        }
+
+        .service-icon::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 1;
+            animation: pulse 2s infinite;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .service-card p {
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .service-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(1, 29, 48, 0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .feature {
+            background: rgba(1, 29, 48, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .feature i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        .service-actions {
+            margin-top: auto;
+        }
+
+        /* Обновленные стили для формы */
+        .ask-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(1, 29, 48, 0.1);
+            outline: none;
+        }
+
+        .form-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group:focus-within .form-icon {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Обновленные стили для списка ресурсов */
+        .resources-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .resource-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+
+        .resource-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .resource-item:hover .resource-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .resource-content {
+            flex: 1;
+        }
+
+        .resource-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .resource-content p {
+            margin-bottom: 0.8rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .resource-access {
+            display: inline-block;
+            background: rgba(1, 29, 48, 0.08);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+            }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .services-hero {
+                padding: 4rem 0;
+            }
+            
+            .services-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .services-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .resource-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-hero {
+                padding: 3rem 0;
+            }
+            
+            .services-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .services-hero p {
+                font-size: 1rem;
+            }
+            
+            .service-card {
+                padding: 2rem;
+            }
+            
+            .service-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Верхняя шапка (без изменений) -->
+    <div class="top-header">
+        <div class="container">
+            <div class="address">г. Липецк, ул. Л. Толстого, 40</div>
+            <div class="top-right">
+                <a href="#" class="login-btn" id="loginBtn">
+                    <i class="fas fa-user"></i>Личный кабинет
+                </a>
+                <div class="social-icons">
+                    <a href="https://vk.com/childbook_lipetsk"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основная шапка (без изменений) -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-main-row">
+                <!-- Логотип слева -->
+                <div class="logo-section">
+                    <a href="../index.html" class="logo">
+                        <img src="../images/logo.png" alt="Логотип библиотеки">
+                        <div class="logo-text">
+                            <div class="logo-line1">Липецкая областная</div>
+                            <div class="logo-line2">детская библиотека</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Поиск справа -->
+                <div class="search-section">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" placeholder="поиск в каталоге" class="search-input">
+                            <button class="search-btn">НАЙТИ</button>
+                        </div>
+                        <a href="https://opac.lib48.ru/wlib/" class="all-catalogs">ВСЕ КАТАЛОГИ</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Меню -->
+            <nav class="main-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="about.html" class="active">О БИБЛИОТЕКЕ</a>
+                        <div class="dropdown-content">
+                            <a href="founder.html">Сведения об учредителе</a>
+                            <a href="documents.html">Документы</a>
+                            <a href="contacts.html">Контакты</a>
+                            <a href="requisites.html">Реквизиты и услуги</a>
+                            <a href="history.html">История библиотеки</a>
+                            <a href="anti-corruption.html">Противодействие коррупции</a>
+                        </div>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="readers.html">ЧИТАТЕЛЯМ</a>
+                        <div class="dropdown-content">
+                            <a href="pushkin_card.html">Пушкинская карта</a>
+                            <a href="working_hours.html">Режим работы</a>
+                            <a href="rules.html">Правила пользования</a>
+                            <a href="services.html">Сервисы</a>
+                        </div>
+                    </li>
+                    <li><a href="afisha.html">АФИША</a></li>
+                    <li><a href="news.html">НОВОСТИ</a></li>
+                    <li><a href="bookshelf.html">КНИЖНАЯ ПОЛКА</a></li>
+                    <li class="dropdown">
+                        <a href="kraevedenie.html">КРАЕВЕДЕНИЕ</a>
+                    
+    <div class="dropdown-content">
+        <a href="kraevedenie-history.html">История края</a>
+        <a href="kraevedenie-writers.html">Писатели Липецкой области</a>
+        <a href="kraevedenie-resources.html">Краеведческие ресурсы</a>
+    </div>
+</li>
+                    <li><a href="resources.html">РЕСУРСЫ</a></li>
+                    <li><a href="colleagues.html">КОЛЛЕГАМ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <main class="main-content">
+        <div class="container">
+            <section class="services-hero">
+                <div class="services-hero-content">
+                    <h1>СЕРВИСЫ</h1>
+                    <p>Все услуги, предоставляемые библиотекой для читателей. Современные решения для комфортного доступа к знаниям и информации.</p>
+                </div>
+            </section>
+
+            <!-- Основной контент -->
+            <div class="content-section">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Продление книг онлайн</h3>
+                        <p>Продлите срок пользования книгами, не посещая библиотеку. Услуга доступна через личный кабинет на сайте или по телефону.</p>
+                        <div class="service-features">
+                            <span class="feature"><i class="fas fa-check"></i> Бесплатно</span>
+                            <span class="feature"><i class="fas fa-check"></i> 24/7</span>
+                        </div>
+                        <div class="service-actions">
+                            <a href="#" class="btn btn-primary">
+                                <i class="fas fa-external-link-alt"></i> Продлить онлайн
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <h3>Бронирование изданий</h3>
+                        <p>Забронируйте нужные издания заранее через электронный каталог. Мы уведомим вас, когда книги будут готовы к выдаче.</p>
+                        <div class="service-features">
+                            <span class="feature"><i class="fas fa-check"></i> Гарантированно</span>
+                            <span class="feature"><i class="fas fa-check"></i> Уведомления</span>
+                        </div>
+                        <div class="service-actions">
+                            <a href="https://opac.lib48.ru/wlib/" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Забронировать
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Виртуальная справка</h3>
+                        <p>Задайте вопрос библиотекарю онлайн и получите квалифицированную помощь в поиске информации по любой теме.</p>
+                        <div class="service-features">
+                            <span class="feature"><i class="fas fa-check"></i> Эксперты</span>
+                            <span class="feature"><i class="fas fa-check"></i> Быстрый ответ</span>
+                        </div>
+                        <div class="service-actions">
+                            <a href="#ask-form" class="btn btn-primary">
+                                <i class="fas fa-comments"></i> Задать вопрос
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>Доставка на дом</h3>
+                        <p>Для читателей с ограниченными возможностями здоровья доступна услуга доставки книг на дом.</p>
+                        <div class="service-features">
+                            <span class="feature"><i class="fas fa-check"></i> Бесплатно</span>
+                            <span class="feature"><i class="fas fa-check"></i> По городу</span>
+                        </div>
+                        <div class="service-actions">
+                            <a href="tel:+74742123456" class="btn btn-primary">
+                                <i class="fas fa-phone"></i> Заказать доставку
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-print"></i>
+                        </div>
+                        <h3>Копирование и сканирование</h3>
+                        <p>Услуги копирования, сканирования и распечатки документов. Доступно в читальном зале библиотеки.</p>
+                        <div class="service-features">
+                            <span class="feature"><i class="fas fa-check"></i> Высокое качество</span>
+                            <span class="feature"><i class="fas fa-check"></i> Цветная печать</span>
+                        </div>
+                        <div class="service-actions">
+                            <a href="#" class="btn btn-outline">
+                                <i class="fas fa-dollar-sign"></i> Узнать цены
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3>Компьютерные услуги</h3>
+                        <p>Доступ к интернету, работа с офисными приложениями, помощь в поиске информации в электронных базах данных.</p>
+                        <div class="service-features">
+                            <span class="feature"><i class="fas fa-check"></i> Wi-Fi</span>
+                            <span class="feature"><i class="fas fa-check"></i> Консультации</span>
+                        </div>
+                        <div class="service-actions">
+                            <a href="#" class="btn btn-outline">
+                                <i class="fas fa-info-circle"></i> Подробнее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card" id="ask-form">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h2>Виртуальная справка</h2>
+                    </div>
+                    <p>Заполните форму ниже, чтобы задать вопрос нашим библиотекарям. Мы ответим вам в течение 1-2 рабочих дней.</p>
+                    
+                    <form class="ask-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Ваше имя *</label>
+                                <input type="text" id="name" name="name" required>
+                                <i class="fas fa-user form-icon"></i>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email для ответа *</label>
+                                <input type="email" id="email" name="email" required>
+                                <i class="fas fa-envelope form-icon"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Категория вопроса</label>
+                            <select id="category" name="category">
+                                <option value="">Выберите категорию</option>
+                                <option value="literature">Литература</option>
+                                <option value="history">История</option>
+                                <option value="science">Наука</option>
+                                <option value="art">Искусство</option>
+                                <option value="other">Другое</option>
+                            </select>
+                            <i class="fas fa-list form-icon"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="question">Ваш вопрос *</label>
+                            <textarea id="question" name="question" rows="5" placeholder="Опишите ваш вопрос подробно..." required></textarea>
+                            <i class="fas fa-comment form-icon"></i>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Отправить вопрос
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h2>Электронные ресурсы</h2>
+                    </div>
+                    <p>Библиотека предоставляет доступ к различным электронным ресурсам и базам данных:</p>
+                    
+                    <div class="resources-list">
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="resource-content">
+                                <h4>Национальная электронная библиотека (НЭБ)</h4>
+                                <p>Крупнейший собраний электронных документов</p>
+                                <span class="resource-access">С компьютеров библиотеки</span>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <div class="resource-content">
+                                <h4>Национальная электронная детская библиотека (НЭДБ)</h4>
+                                <p>Архив оцифрованных материалов для детей</p>
+                                <span class="resource-access">С любого устройства</span>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-tablet-alt"></i>
+                            </div>
+                            <div class="resource-content">
+                                <h4>ЛитРес: Библиотека</h4>
+                                <p>Доступ к электронным и аудиокнигам</p>
+                                <span class="resource-access">Удаленный доступ</span>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="resource-content">
+                                <h4>East View</h4>
+                                <p>База данных российских и зарубежных периодических изданий</p>
+                                <span class="resource-access">С компьютеров библиотеки</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="note">Доступ к некоторым ресурсам возможен только с компьютеров библиотеки. Уточняйте информацию у сотрудников.</p>
+                    
+                    <a href="resources.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> Все электронные ресурсы
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>г. Липецк, ул. Л. Толстого, 40</p>
+                    <p>Телефон: +7 (4742) 123-456</p>
+                    <p>Email: info@lib48.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="rules.html">Правила пользования</a></li>
+                        <li><a href="afisha.html">Афиша мероприятий</a></li>
+                        <li><a href="resources.html">Электронные ресурсы</a></li>
+                        <li><a href="services.html">Сервисы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Мы в соцсетях</h3>
+                    <div class="social-icons">
+                        <a href="https://vk.com/childbook_lipetsk"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Липецкая областная детская библиотека. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/dropdown.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/forms.js"></script>
+</body>
+</html>
